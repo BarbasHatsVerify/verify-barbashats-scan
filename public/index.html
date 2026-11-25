@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#fff"><title>AUTHENTIC — Rico o Muerto Rom</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fff;font-family:Arial,Helvetica,sans-serif}
+main{width:min(100%,720px);margin:0 auto;position:relative;line-height:0}
+.art{display:block;width:100%;height:auto}
+#count{position:absolute;top:72.45%;left:50%;transform:translateX(-50%);width:44%;text-align:center;
+font-size:clamp(30px,7.1vw,62px);line-height:1.05;font-weight:800;letter-spacing:2px;color:#050505;white-space:nowrap}
+#status{position:absolute;top:96%;left:0;width:100%;text-align:center;font:12px Arial;color:#777;line-height:1.2}
+</style></head>
+<body><main>
+<img class="art" src="/design.jpeg" alt="AUTHENTIC Rico o Muerto Rom — gorra Barbas Hats">
+<div id="count" aria-live="polite">0 SCANS</div>
+<div id="status"></div>
+</main>
+<script>
+(async()=>{
+ const count=document.getElementById('count'), status=document.getElementById('status');
+ try{
+   const r=await fetch('/api/scan',{method:'POST',cache:'no-store'});
+   if(!r.ok) throw new Error();
+   const d=await r.json();
+   count.textContent=`${d.count} ${d.count===1?'SCAN':'SCANS'}`;
+ }catch(e){count.textContent='—';status.textContent='No se pudo conectar al contador. Intenta recargar.'}
+})();
+</script></body></html>
